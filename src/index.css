@@ -1,3 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+
+body {
+  font-family: "Raleway", sans-serif;
+  font-size: 16px;
+  background: linear-gradient(135deg, rgba(244, 219, 249, 1) 0%, rgba(217, 219, 254, 1) 100%);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+}
