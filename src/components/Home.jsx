@@ -1,7 +1,10 @@
+import { useState } from "react";
 import Container from "./Container";
 import Tasks from "./Tasks";
+import AddNewTask from "./AddNewTask";
 
 const Home = () => {
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <section className="mx-5 md:mx-10">
       {/* main container */}
@@ -40,9 +43,13 @@ const Home = () => {
             </div>
             {/* add Task section */}
             <div className="col-span-1">
-              <button className="w-full py-1 font-medium bg-primary text-white relative overflow-hidden group z-10 duration-300 hover:bg-primary/95 rounded-sm">
+              <button
+                onClick={() => setIsOpen(!isOpen)}
+                className="w-full py-1 font-medium bg-primary text-white relative overflow-hidden group z-10 duration-300 hover:bg-primary/95 rounded-sm active:scale-75"
+              >
                 Add New Task
               </button>
+              <AddNewTask isOpen={isOpen} setIsOpen={setIsOpen} />
             </div>
           </div>
           {/* tasks section */}
