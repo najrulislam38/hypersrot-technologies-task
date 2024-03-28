@@ -1,15 +1,31 @@
+import { useForm } from "react-hook-form";
 import Modal from "./ui/Modal";
 import PropTypes from "prop-types";
+import { useDispatch } from "react-redux";
+import { addTask } from "../redux/features/tasks/tasksSlice";
 
 const AddNewTask = ({ isOpen, setIsOpen }) => {
   // get today
   const today = new Date().toISOString().split("T")[0];
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm();
+  const dispatch = useDispatch();
+
+  const onSubmit = (data) => {
+    dispatch(addTask(data));
+  };
+
   return (
     <div>
       <Modal isOpen={isOpen} setIsOpen={setIsOpen} headTitle={"Create A Task"}>
         <div className="px-6 py-5">
-          <form className="space-y-3">
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
+            {/* title field */}
             <div className="flex justify-between items-center gap-5">
               <label htmlFor="title" className="font-semibold">
                 Title:
@@ -18,9 +34,20 @@ const AddNewTask = ({ isOpen, setIsOpen }) => {
                 type="text"
                 id="title"
                 name="title"
+                {...register("title", {
+                  required: true,
+                  formState: { errors },
+                  maxLength: 20,
+                })}
                 className="rounded w-2/3 py-1 focus:border-gray-500  bg-gray-200 focus:bg-white"
               />
             </div>
+            {errors.title && (
+              <p className="text-sm text-red-500 text-right ">
+                Title field is required amd most have less or equal 20 letters.
+              </p>
+            )}
+            {/* description field */}
             <div className="flex justify-between items-center gap-5">
               <label htmlFor="description" className="font-semibold">
                 Description:
@@ -29,9 +56,18 @@ const AddNewTask = ({ isOpen, setIsOpen }) => {
                 type="text"
                 id="description"
                 name="description"
+                {...register("description", {
+                  required: true,
+                })}
                 className="rounded w-2/3 focus:border-gray-500  bg-gray-200 focus:bg-white"
               />
             </div>
+            {errors.description && (
+              <p className="text-sm text-red-500 text-right md:mr-10">
+                This field is required.
+              </p>
+            )}
+            {/* team field */}
             <div className="flex justify-between items-center gap-5">
               <label htmlFor="team" className="font-semibold">
                 Team:
@@ -40,20 +76,38 @@ const AddNewTask = ({ isOpen, setIsOpen }) => {
                 type="text"
                 id="team"
                 name="team"
+                {...register("team", {
+                  required: true,
+                })}
                 className="rounded w-2/3 py-1 focus:border-gray-500  bg-gray-200 focus:bg-white"
               />
             </div>
+            {errors.team && (
+              <p className="text-sm text-red-500 text-right md:mr-10">
+                This field is required.
+              </p>
+            )}
+            {/* assignee field */}
             <div className="flex flex-wrap justify-between items-center gap-5">
-              <label htmlFor="Assignee" className="font-semibold">
+              <label htmlFor="assignee" className="font-semibold">
                 Assignee:
               </label>
               <input
                 type="text"
-                id="Assignee"
-                name="Assignee"
+                id="assignee"
+                name="assignee"
+                {...register("assignee", {
+                  required: true,
+                })}
                 className="rounded w-2/3 py-1 focus:border-gray-500  bg-gray-200 focus:bg-white"
               />
             </div>
+            {errors.assignee && (
+              <p className="text-sm text-red-500 text-right md:mr-10">
+                This field is required.
+              </p>
+            )}
+            {/* priority field */}
             <div className="flex justify-between items-center gap-5 ">
               <label htmlFor="priority" className="font-semibold">
                 Priority:
@@ -61,6 +115,9 @@ const AddNewTask = ({ isOpen, setIsOpen }) => {
               <select
                 name="priority"
                 id="priority"
+                {...register("priority", {
+                  required: true,
+                })}
                 className=" w-2/3 py-1 focus:border-gray-500 rounded bg-gray-200 focus:bg-white"
               >
                 <option value="p0">P0</option>
@@ -68,6 +125,37 @@ const AddNewTask = ({ isOpen, setIsOpen }) => {
                 <option value="p2">P2</option>
               </select>
             </div>
+            {errors.priority && (
+              <p className="text-sm text-red-500 text-right md:mr-10">
+                This field is required.
+              </p>
+            )}
+            {/* status field */}
+            <div className="flex justify-between items-center gap-5 ">
+              <label htmlFor="status" className="font-semibold">
+                Status:
+              </label>
+              <select
+                name="status"
+                id="status"
+                {...register("status", {
+                  required: true,
+                })}
+                className=" w-2/3 py-1 focus:border-gray-500 rounded bg-gray-200 focus:bg-white"
+              >
+                <option value="pending">Pending</option>
+                <option value="in-going">In Going</option>
+                <option value="completed">Completed</option>
+                <option value="deploy">Deploy</option>
+                <option value="deferred">Deferred</option>
+              </select>
+            </div>
+            {errors.status && (
+              <p className="text-sm text-red-500 text-right md:mr-10">
+                This field is required.
+              </p>
+            )}
+            {/* start-date field */}
             <div className="flex flex-wrap justify-between items-center gap-5">
               <label htmlFor="start-date" className="font-semibold">
                 Start Date:
@@ -77,10 +165,14 @@ const AddNewTask = ({ isOpen, setIsOpen }) => {
                 id="start-date"
                 name="start-date"
                 defaultValue={today}
+                {...register("start-date", {
+                  required: true,
+                })}
                 readOnly
                 className="rounded w-2/3 py-1 focus:border-gray-500  bg-gray-200 focus:bg-white"
               />
             </div>
+            {/* end-date field */}
             <div className="flex flex-wrap justify-between items-center gap-5">
               <label htmlFor="end-date" className="font-semibold">
                 End Date:
@@ -88,11 +180,22 @@ const AddNewTask = ({ isOpen, setIsOpen }) => {
               <input
                 type="date"
                 id="end-date"
-                name="end-date"
+                name="endDate"
+                {...register("endDate", {
+                  required: true,
+                })}
                 className="rounded w-2/3 py-1 focus:border-gray-500  bg-gray-200 focus:bg-white"
               />
             </div>
-            <button className="py-2 px-3 font-medium bg-primary text-white relative overflow-hidden group z-10 duration-300 hover:bg-primary/95 rounded-sm active:scale-75 ">
+            {errors.endDate && (
+              <p className="text-sm text-red-500 text-right md:mr-10">
+                This field is required.
+              </p>
+            )}
+            <button
+              type="submit"
+              className="py-2 px-3 font-medium bg-primary text-white relative overflow-hidden group z-10 duration-300 hover:bg-primary/95 rounded-sm active:scale-75 "
+            >
               Add Task
             </button>
           </form>
