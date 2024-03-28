@@ -1,4 +1,5 @@
 import Modal from "./ui/Modal";
+import PropTypes from "prop-types";
 
 const DeleteTask = ({ isOpen, setIsOpen, title }) => {
   return (
@@ -24,6 +25,12 @@ const DeleteTask = ({ isOpen, setIsOpen, title }) => {
       </Modal>
     </div>
   );
+};
+
+DeleteTask.propTypes = {
+  isOpen: PropTypes.bool,
+  setIsOpen: PropTypes.func,
+  title: PropTypes.string,
 };
 
 export default DeleteTask;
