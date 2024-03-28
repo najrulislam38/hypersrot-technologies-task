@@ -3,7 +3,7 @@ import { Fragment } from "react";
 import PropTypes from "prop-types";
 import { XCircleIcon } from "@heroicons/react/24/outline";
 
-export default function Modal({ isOpen, setIsOpen, title, children }) {
+export default function Modal({ isOpen, setIsOpen, headTitle, children }) {
   function closeModal() {
     setIsOpen(false);
   }
@@ -41,7 +41,7 @@ export default function Modal({ isOpen, setIsOpen, title, children }) {
                     className="text-lg font-medium leading-6 text-gray-900 "
                   >
                     <div className="flex items-center justify-between px-6 py-2 bg-white text-black">
-                      <h3 className="text-xl font-semibold">{title}</h3>
+                      <h3 className="text-xl font-semibold">{headTitle}</h3>
                       <button onClick={() => setIsOpen(false)}>
                         <XCircleIcon className="w-5 h-5 text-black" />
                       </button>
@@ -61,6 +61,6 @@ export default function Modal({ isOpen, setIsOpen, title, children }) {
 Modal.propTypes = {
   isOpen: PropTypes.bool,
   setIsOpen: PropTypes.func,
-  title: PropTypes.string,
+  headTitle: PropTypes.string,
   children: PropTypes.node,
 };

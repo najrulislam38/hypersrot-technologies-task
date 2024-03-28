@@ -1,6 +1,9 @@
-import { InformationCircleIcon } from "@heroicons/react/24/outline";
+import { InformationCircleIcon, TrashIcon } from "@heroicons/react/24/outline";
+import { useState } from "react";
+import DeleteTask from "./DeleteTask";
 
 const TaskCard = () => {
+  const [isOpen, setIsOpen] = useState(false);
   const task = {
     id: 1,
     status: "pending",
@@ -21,12 +24,29 @@ const TaskCard = () => {
         </button>
       </div>
       <p className="mb-3 text-sm pt-2 text-gray-800">{task?.description}</p>
-      <div className="flex justify-between items-center">
-        <p className="text-sm font-semibold italic">{task?.assignedTo}</p>
-        <button className="p-0.5 bg-primary text-white rounded-md">
-          <InformationCircleIcon className="w-4 h-4 " />
-        </button>
+      <div className="flex justify-between items-center relative">
+        <h3 className="text-sm font-semibold italic">{task?.assignedTo}</h3>
+
+        <div>
+          <button className="p-0.5 bg-primary text-white rounded-md">
+            <InformationCircleIcon className="w-4 h-4 " />
+          </button>
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="border p-0.5 rounded ml-3"
+          >
+            <TrashIcon className="w-4 h-4 text-red-500 " />
+          </button>
+          <DeleteTask
+            isOpen={isOpen}
+            setIsOpen={setIsOpen}
+            title={task.title}
+          ></DeleteTask>
+        </div>
       </div>
+      <button className="px-3 py-1 mt-3 font-medium text-sm bg-primary text-white relative overflow-hidden group z-10 duration-300 hover:bg-primary/95 rounded-sm active:scale-90">
+        Assign
+      </button>
     </div>
   );
 };

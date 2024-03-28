@@ -20,7 +20,7 @@ const Home = () => {
                   type="text"
                   placeholder="Assignee Name"
                 />
-                <select className="rounded-lg border border-gray-500 px-2 py-1 text-gray-600 ring-offset duration-300 focus:outline-none focus:ring">
+                <select className="min-w-24 rounded-lg border border-gray-500 px-2 py-1 text-gray-600 ring-offset duration-300 focus:outline-none focus:ring">
                   <option value="">Priority</option>
                   <option value="P0">P0</option>
                   <option value="P1">P1</option>
@@ -33,7 +33,7 @@ const Home = () => {
               </form>
               <div className="py-5">
                 <h3 className="font-semibold inline mr-3">Sort By: </h3>
-                <select className="rounded-lg border border-gray-500 px-2 py-1 text-gray-600 ring-offset duration-300 focus:outline-none focus:ring">
+                <select className="rounded-lg min-w-24 border border-gray-500 px-2 py-1 text-gray-600 ring-offset duration-300 focus:outline-none focus:ring">
                   <option value="">Priority</option>
                   <option value="P0">P0</option>
                   <option value="P1">P1</option>
@@ -45,7 +45,7 @@ const Home = () => {
             <div className="col-span-1">
               <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="w-full py-1 font-medium bg-primary text-white relative overflow-hidden group z-10 duration-300 hover:bg-primary/95 rounded-sm active:scale-75"
+                className="w-full py-1 font-medium bg-primary text-white relative overflow-hidden group z-10 duration-300 hover:bg-primary/95 rounded-sm active:scale-90"
               >
                 Add New Task
               </button>

@@ -7,7 +7,7 @@ const AddNewTask = ({ isOpen, setIsOpen }) => {
 
   return (
     <div>
-      <Modal isOpen={isOpen} setIsOpen={setIsOpen} title={"Create A Task"}>
+      <Modal isOpen={isOpen} setIsOpen={setIsOpen} headTitle={"Create A Task"}>
         <div className="px-6 py-5">
           <form className="space-y-3">
             <div className="flex justify-between items-center gap-5">
