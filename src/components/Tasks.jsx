@@ -1,6 +1,16 @@
+import { useSelector } from "react-redux";
 import TaskCard from "./TaskCard";
 
 const Tasks = () => {
+  const { tasks } = useSelector((state) => state.tasksSlice);
+  console.log(tasks);
+
+  const paddingTask = tasks.filter((task) => task?.status === "pending");
+  const inProgressTask = tasks.filter((task) => task?.status === "inProgress");
+  const completedTask = tasks.filter((task) => task?.status === "completed");
+  const deployTask = tasks.filter((task) => task?.status === "deploy");
+  const deferredTask = tasks.filter((task) => task?.status === "deferred");
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 pt-5">
       {/* Pending tasks */}
@@ -9,8 +19,9 @@ const Tasks = () => {
           Pending
         </h3>
         <div>
-          <TaskCard />
-          <TaskCard />
+          {paddingTask?.map((task) => (
+            <TaskCard key={task?.id} task={task}></TaskCard>
+          ))}
         </div>
       </div>
       {/* In progress tasks */}
@@ -19,8 +30,9 @@ const Tasks = () => {
           In Progress
         </h3>
         <div>
-          <TaskCard />
-          <TaskCard />
+          {inProgressTask?.map((task) => (
+            <TaskCard key={task?.id} task={task}></TaskCard>
+          ))}
         </div>
       </div>
       {/* completed tasks */}
@@ -29,7 +41,9 @@ const Tasks = () => {
           Completed
         </h3>
         <div>
-          <TaskCard />
+          {completedTask?.map((task) => (
+            <TaskCard key={task?.id} task={task}></TaskCard>
+          ))}
         </div>
       </div>
       {/* Deployed tasks */}
@@ -38,8 +52,9 @@ const Tasks = () => {
           Deployed
         </h3>
         <div>
-          <TaskCard />
-          <TaskCard />
+          {deployTask?.map((task) => (
+            <TaskCard key={task?.id} task={task}></TaskCard>
+          ))}
         </div>
       </div>
       {/* deferred tasks */}
@@ -48,8 +63,9 @@ const Tasks = () => {
           Deferred
         </h3>
         <div>
-          <TaskCard />
-          <TaskCard />
+          {deferredTask?.map((task) => (
+            <TaskCard key={task?.id} task={task}></TaskCard>
+          ))}
         </div>
       </div>
     </div>

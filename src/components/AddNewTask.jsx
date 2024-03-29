@@ -144,7 +144,7 @@ const AddNewTask = ({ isOpen, setIsOpen }) => {
                 className=" w-2/3 py-1 focus:border-gray-500 rounded bg-gray-200 focus:bg-white"
               >
                 <option value="pending">Pending</option>
-                <option value="in-going">In Going</option>
+                <option value="inProgress">In Progress</option>
                 <option value="completed">Completed</option>
                 <option value="deploy">Deploy</option>
                 <option value="deferred">Deferred</option>

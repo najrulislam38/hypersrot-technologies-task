@@ -1,19 +1,21 @@
 import { InformationCircleIcon, TrashIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 import DeleteTask from "./DeleteTask";
+import PropTypes from "prop-types";
 
-const TaskCard = () => {
+const TaskCard = ({ task }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const task = {
-    id: 1,
-    status: "pending",
-    title: "Task",
-    description:
-      "We need a remove button in our task card. Meke the button red and use Heroicon for tashbin icon.",
-    date: "2023-08-28",
-    assignedTo: "Najrul Islam",
-    priority: "P0",
-  };
+  // console.log(task);
+  // const task = {
+  //   id: 1,
+  //   status: "pending",
+  //   title: "Task",
+  //   description:
+  //     "We need a remove button in our task card. Meke the button red and use Heroicon for tashbin icon.",
+  //   date: "2023-08-28",
+  //   assignee: "Najrul Islam",
+  //   priority: "P0",
+  // };
 
   return (
     <div className="bg-gray-100 rounded-md p-3 m-2">
@@ -25,7 +27,9 @@ const TaskCard = () => {
       </div>
       <p className="mb-3 text-sm pt-2 text-gray-800">{task?.description}</p>
       <div className="flex justify-between items-center relative">
-        <h3 className="text-sm font-semibold italic">{task?.assignedTo}</h3>
+        <h3 className="text-sm font-semibold italic">
+          {task?.assignee && `@${task?.assignee}`}
+        </h3>
 
         <div>
           <button className="p-0.5 bg-primary text-white rounded-md">
@@ -49,6 +53,10 @@ const TaskCard = () => {
       </button>
     </div>
   );
+};
+
+TaskCard.propTypes = {
+  task: PropTypes.object,
 };
 
 export default TaskCard;
