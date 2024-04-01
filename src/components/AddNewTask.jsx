@@ -12,7 +12,6 @@ const AddNewTask = ({ isOpen, setIsOpen }) => {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm();
   const dispatch = useDispatch();
 

@@ -2,20 +2,11 @@ import { InformationCircleIcon, TrashIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 import DeleteTask from "./DeleteTask";
 import PropTypes from "prop-types";
+import UpdateTask from "./UpdateTask";
 
 const TaskCard = ({ task }) => {
   const [isOpen, setIsOpen] = useState(false);
-  // console.log(task);
-  // const task = {
-  //   id: 1,
-  //   status: "pending",
-  //   title: "Task",
-  //   description:
-  //     "We need a remove button in our task card. Meke the button red and use Heroicon for tashbin icon.",
-  //   date: "2023-08-28",
-  //   assignee: "Najrul Islam",
-  //   priority: "P0",
-  // };
+  const [isUpdate, setIsUpdate] = useState(false);
 
   return (
     <div className="bg-gray-100 rounded-md p-3 m-2">
@@ -32,19 +23,25 @@ const TaskCard = ({ task }) => {
         </h3>
 
         <div>
-          <button className="p-0.5 bg-primary text-white rounded-md">
-            <InformationCircleIcon className="w-4 h-4 " />
-          </button>
           <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="border p-0.5 rounded ml-3"
+            onClick={() => setIsUpdate(!isUpdate)}
+            className="p-0.5 bg-primary text-white rounded-md"
           >
-            <TrashIcon className="w-4 h-4 text-red-500 " />
+            <InformationCircleIcon className="w-4 h-4 " />
+            <UpdateTask isOpen={isUpdate} setIsOpen={setIsUpdate} task={task} />
           </button>
+          {task?.status !== "completed" && (
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="border p-0.5 rounded ml-3"
+            >
+              <TrashIcon className="w-4 h-4 text-red-500 " />
+            </button>
+          )}
           <DeleteTask
             isOpen={isOpen}
             setIsOpen={setIsOpen}
-            title={task.title}
+            task={task}
           ></DeleteTask>
         </div>
       </div>

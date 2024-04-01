@@ -28,7 +28,7 @@ const Home = () => {
                 </select>
                 <input
                   className="rounded-lg border border-gray-500 px-2 py-1 text-gray-600 ring-offset duration-300 focus:outline-none focus:ring"
-                  type="datetime-local"
+                  type="date"
                 />
               </form>
               <div className="py-5">
